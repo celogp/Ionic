@@ -17,14 +17,14 @@
             myappService.listProducts = function () {
                 return ($http({
                     method: 'GET',
-                    url: 'http://localhost:53964/api/produto/ConsultarProdutos'
+                    url: 'http://localhost:52426/api/produto/ConsultarProdutos'
                 }));
             };
 
             myappService.listProduct = function (id) {
                 return ($http({
                     method: 'GET',
-                    url: 'http://localhost:53964/api/produto/ConsultarProdutoPorCodigo',
+                    url: 'http://localhost:52426/api/produto/ConsultarProdutoPorCodigo/',
                     params: { 'id': id }
                 }));
             };
@@ -41,6 +41,12 @@
 
             myappService.eraseProduct = function () {
                 console.log('passou no servico de eraseProduct');
+                return ($http({
+                    method: 'POST',
+                    url: 'http://localhost:52426/api/produto/ExcluirProduto/',
+                    data: product
+                }));
+
             };
 
             return myappService;
