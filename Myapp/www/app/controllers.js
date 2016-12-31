@@ -2,7 +2,6 @@
     "use strict";
 
     angular.module("myapp.controllers", [])
-
         .controller("appCtrl", ["$scope", function ($scope) {
         }])
 
@@ -51,11 +50,16 @@
                 });
             };
 
+            $scope.btnAdicionar = function () {
+                myappService.addProduct($scope.product).success(function (data) {
+                    initProducts();
+                });
+            };
+
             $scope.btnSalvar = function () {
                 myappService.saveProduct($scope.product).success(function (data) {
-                    $scope.product = {};
+                    initProducts();
                 });
-                initProducts();
             };
 
             $scope.btnEditar = function (id) {
@@ -68,7 +72,10 @@
 
             $scope.btnApagar = function (id) {
                 console.log('passou no apagar', id);
-                myappService.eraseProduct();
+                myappService.eraseProduct(id).success(function (data) {
+                    initProducts();    
+                });
+                
             };
 
         }])

@@ -17,34 +17,42 @@
             myappService.listProducts = function () {
                 return ($http({
                     method: 'GET',
-                    url: 'http://localhost:52426/api/produto/ConsultarProdutos'
+                    url: 'http://localhost:52426/Api/Produtos/ConsultarProdutos'
                 }));
             };
 
             myappService.listProduct = function (id) {
                 return ($http({
                     method: 'GET',
-                    url: 'http://localhost:52426/api/produto/ConsultarProdutoPorCodigo/',
-                    params: { 'id': id }
+                    url: 'http://localhost:52426/Api/Produtos/ConsultarProdutoPorCodigo/'+id
                 }));
+            };
+
+            myappService.addProduct = function (product) {
+                console.log('passou no servico de addProduct', product.Id);
+                return ($http({
+                    method: 'POST',
+                    url: 'http://localhost:52426/Api/Produtos/IncluirProduto/',
+                    data: product
+                }));
+
             };
 
             myappService.saveProduct = function (product) {
-                console.log('passou no servico de saveProduct');
+                console.log('passou no servico de saveProduct', product.Id);
                 return ($http({
-                    method: 'POST',
-                    url: 'http://localhost:53964/api/produto/CadastrarProduto',
+                    method: 'PUT',
+                    url: 'http://localhost:52426/Api/Produtos/AlterarProduto/' + product.Id,
                     data: product
                 }));
 
             };
 
-            myappService.eraseProduct = function () {
+            myappService.eraseProduct = function (id) {
                 console.log('passou no servico de eraseProduct');
                 return ($http({
-                    method: 'POST',
-                    url: 'http://localhost:52426/api/produto/ExcluirProduto/',
-                    data: product
+                    method: 'DELETE',
+                    url: 'http://localhost:52426/Api/Produtos/ExcluirProduto/'+id
                 }));
 
             };
