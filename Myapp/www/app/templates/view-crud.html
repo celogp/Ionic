@@ -1,28 +1,38 @@
 ﻿<ion-view view-title="Crud">
+    <ion-content class="padding">
+        <ion-refresher on-refresh="refresh(true)" spinner="android"></ion-refresher>
+    </ion-content>
     <ion-content>
-        <div id="crud-button-bar1" class="button-bar">
-            <button id="crud-button3" class="button button-positive  button-block icon ion-android-add" ng-click="btnAdicionar()"></button>
-            <button id="crud-button4" class="button button-positive  button-block icon ion-android-done" ng-click="btnSalvar()"></button>
+        <div ng-show="myShow">
+            <div id="crud-button-bar1" class="button-bar">
+                <button id="crud-button3" class="button button-positive  button-block icon ion-android-add" ng-click="btnAdicionar()"></button>
+                <button id="crud-button4" class="button button-positive  button-block icon ion-android-done" ng-click="btnSalvar()"></button>
+            </div>
+            <form id="crud-form1" class="list">
+                <label class="item item-input item-stacked-label" id="crud-input1">
+                    <span class="input-label">Id</span>
+                    <input type="text" placeholder="" ng-model="product.Id">
+                </label>
+
+                <label class="item item-input item-stacked-label" id="crud-input2">
+                    <span class="input-label">Nome</span>
+                    <input type="text" placeholder="" ng-model="product.Name">
+                </label>
+                <label class="item item-input item-stacked-label" id="crud-input3">
+                    <span class="input-label">Categoria</span>
+                    <input type="text" placeholder="" ng-model="product.Category">
+                </label>
+                <label class="item item-input item-stacked-label" id="crud-input4">
+                    <span class="input-label">Preço</span>
+                    <input type="text" placeholder="" ng-model="product.Price">
+                </label>
+
+            </form>
+
         </div>
-        <form id="crud-form1" class="list">
-            <label class="item item-input item-stacked-label" id="crud-input2">
-                <span class="input-label">Nome</span>
-                <input type="text" placeholder="" ng-model="product.Name">
-            </label>
-            <label class="item item-input item-stacked-label" id="crud-input3">
-                <span class="input-label">Categoria</span>
-                <input type="text" placeholder="" ng-model="product.Category">
-            </label>
-            <label class="item item-input item-stacked-label" id="crud-input4">
-                <span class="input-label">Preço</span>
-                <input type="text" placeholder="" ng-model="product.Price">
-            </label>
-            <p>
-        </form>
 
         <div class="list">
             <div class="item item-button-right" ng-repeat="prod in products">
-                
                 {{prod.Id}} - {{prod.Name}}
                 <span class="buttons">
                     <button class="button button-positive ion-ios-eye" ng-click="btnEditar(prod.Id)"></button>
@@ -31,9 +41,9 @@
                 <p>
                     {{prod.Category}} - {{prod.Price}}
                 </p>
-                
+
             </div>
         </div>
-
     </ion-content>
+
 </ion-view>

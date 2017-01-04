@@ -1,6 +1,5 @@
 ﻿(function () {
     "use strict";
-
     angular.module("myapp.controllers", [])
         .controller("appCtrl", ["$scope", function ($scope) {
         }])
@@ -42,42 +41,48 @@
         .controller('crudCtrl', ["$scope", "myappService", function ($scope, myappService) {
             $scope.product = { Id: 0, Name: '', Category: '', Price: 0.00 };
             $scope.products = [{}];
+            $scope.myShow = false;
             initProducts();
 
             function initProducts() {
+                myappService.wait(true);
                 myappService.listProducts().success(function (data) {
                     $scope.products = data;
+                    myappService.wait(false);
                 });
             };
 
             $scope.btnAdicionar = function () {
                 myappService.addProduct($scope.product).success(function (data) {
+                    $scope.myShow = !$scope.myShow;
                     initProducts();
                 });
             };
 
             $scope.btnSalvar = function () {
+                $scope.error = "testexxx";
+                $scope.activeError = true;
                 myappService.saveProduct($scope.product).success(function (data) {
+                    //$scope.myShow = !$scope.myShow;
                     initProducts();
                 });
             };
 
             $scope.btnEditar = function (id) {
-                console.log('passou no editar', id);
+                myappService.wait(true);
                 myappService.listProduct(id).success(function (data) {
                     $scope.product = data;
+                    if ($scope.myShow != true) {
+                        $scope.myShow = !$scope.myShow;
+                    }
+                    myappService.wait(false);
                 });
-
             };
 
             $scope.btnApagar = function (id) {
-                console.log('passou no apagar', id);
                 myappService.eraseProduct(id).success(function (data) {
-                    initProducts();    
+                    initProducts();
                 });
-                
             };
-
         }])
-        
 })();
